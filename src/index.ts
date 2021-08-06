@@ -14,7 +14,6 @@ app.use(morgan('dev')) // que use morgan y que tenga un formato en consola? dev
 app.use(express.json());
 
 //rutas o routs
-
 app.use(useRoute); 
 
 

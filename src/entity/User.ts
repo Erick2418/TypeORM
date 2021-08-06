@@ -9,9 +9,16 @@ export class User{
     @Column()
     firstname: string;
 
+    @Column('date')
+    fecha: string;
+    
     @Column()
-    lastname: string;
-
-
+    correo: string;
+    
+    @Column()
+    telefono: string;
+    
+    @Column('double')
+    sueldo: number
 }
 
