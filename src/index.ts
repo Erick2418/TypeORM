@@ -2,7 +2,8 @@ import 'reflect-metadata';
 import express from 'express';
 import cors from 'cors'
 import morgan from 'morgan';
-import useRoute from './routes/user.routes';
+import userRoute from './routes/user.routes';
+import authRoute from './routes/auth.routes';
 import {createConnection} from 'typeorm'
 require('dotenv').config();
 
@@ -16,7 +17,8 @@ app.use(morgan('dev')) // que use morgan y que tenga un formato en consola? dev
 app.use(express.json());
 
 //rutas o routs
-app.use(useRoute); 
+app.use('/api/user',userRoute); 
+app.use('/api/auth',authRoute); 
 
 
 app.listen(process.env.PORT, ()=>{
