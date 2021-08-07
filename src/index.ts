@@ -17,6 +17,5 @@ app.use(express.json());
 app.use(useRoute); 
 
 
-
 app.listen(3000);
 console.log('Server on port',3000);
