@@ -10,7 +10,7 @@ export class Auth{
     @Column({type:"varchar", length:75})
     email: string;
     
-    @Column({type:"varchar", length:12})
+    @Column({type:"varchar"})
     password: string;
     
 }
