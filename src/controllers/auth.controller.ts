@@ -97,9 +97,12 @@ export const createUserAuth = async (req:Request,res:Response): Promise<Response
 }
 
 export const revalidarToken = async (req:Request,res:Response): Promise<Response> => {
-    
+
+    const {userId,email} = req;
+    //generando token nuevo
+    const token =  await generarJWT(userId,email);
     return res.json({
         ok:true,
-        msg: 'renew'
+        token
     })
 }
