@@ -4,6 +4,8 @@ import cors from 'cors'
 import morgan from 'morgan';
 import useRoute from './routes/user.routes';
 import {createConnection} from 'typeorm'
+require('dotenv').config();
+
 const app = express();//el app es el server basicamente xd
 createConnection();
 //morgan te ayuda a ver las peticiones http que llegan al servidor
@@ -17,5 +19,7 @@ app.use(express.json());
 app.use(useRoute); 
 
 
-app.listen(3000);
-console.log('Server on port',3000);
+app.listen(process.env.PORT, ()=>{
+    console.log(`Servidor corriendo en puerto ${process.env.PORT}`);
+});
+

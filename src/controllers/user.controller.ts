@@ -1,7 +1,7 @@
 import {Request,Response} from 'express'
 
 import { getRepository } from 'typeorm' //tre un repo o una tabla de una base de datos
-import { User } from '../entity/User';
+import { User } from '../entity';
 
 export const getUsers = async (req:Request,res:Response): Promise<Response> => {
 
