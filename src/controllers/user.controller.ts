@@ -110,9 +110,25 @@ export const deleteUser = async (req:Request,res:Response): Promise<Response> =>
 
     const userID:string= req.params.id;
 
-    const results =  await getRepository(User).delete(userID);//es como hacer un select
-
-    return res.json(results);
+    try {
+        const results =  await getRepository(User).delete(userID);//es como hacer un select
+    //    console.log(results.affected) ;
+        if(results.affected==0){
+            return res.status(404).json({
+                ok:false,
+                msg: ' Usuario no existe con ese ID'
+            })
+        }
+        return res.json({
+            ok:true,
+            msg: ' Usuario eliminado con exito'
+        });
+    } catch (error) {
+        return res.status(500).json({
+            ok:false,
+            msg: 'Conectate al administrador'
+        })
+    }    
 
 }
 
