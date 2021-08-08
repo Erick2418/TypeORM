@@ -11,6 +11,7 @@ import { validarJwt } from '../middlewares/validarJwt';
 const router = Router();
 
     router.post('/new',validarShemaAuth(shemaAuth),createUserAuth);
+    
     router.post('/',validarShemaAuth(shemaAuth),loginUserAuth);
 
     router.get('/renew',validarJwt,revalidarToken); 
