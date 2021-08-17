@@ -3,8 +3,7 @@ import express from 'express';
 import dotenv from 'dotenv'
 import cors from 'cors'
 import morgan from 'morgan';
-// import userRoute from './routes/user.routes';
-// import authRoute from './routes/auth.routes';
+
 import {createConnection} from 'typeorm'
 
 import clienteRoute from './routes/cliente.routes';
@@ -12,16 +11,19 @@ import clienteRoute from './routes/cliente.routes';
 import reservacionRoute from './routes/reservaciones.routes';
 
 
-const app = express();//el app es el server basicamente xd
+const app = express();
+
 
 dotenv.config();
-// console.log(process.env.JWT);
+
+
 
 createConnection();
-//morgan te ayuda a ver las peticiones http que llegan al servidor
-//middlewares   -- funciones que se ejecutan antes de que lleguen a nuestras rutas
-app.use(cors()); // le decimos que sue cors es para que salga de una sola ruta.
-app.use(morgan('dev')) // que use morgan y que tenga un formato en consola? dev
+
+app.use(cors()); 
+
+app.use(morgan('dev')) 
+
 app.use(express.json());
 
 //rutas o routs
