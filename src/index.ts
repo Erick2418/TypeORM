@@ -3,9 +3,13 @@ import express from 'express';
 import dotenv from 'dotenv'
 import cors from 'cors'
 import morgan from 'morgan';
-import userRoute from './routes/user.routes';
-import authRoute from './routes/auth.routes';
+// import userRoute from './routes/user.routes';
+// import authRoute from './routes/auth.routes';
 import {createConnection} from 'typeorm'
+
+import clienteRoute from './routes/cliente.routes';
+
+import reservacionRoute from './routes/reservaciones.routes';
 
 
 const app = express();//el app es el server basicamente xd
@@ -21,8 +25,10 @@ app.use(morgan('dev')) // que use morgan y que tenga un formato en consola? dev
 app.use(express.json());
 
 //rutas o routs
-app.use('/api/user',userRoute); 
-app.use('/api/auth',authRoute); 
+// app.use('/api/user',userRoute); 
+app.use('/api/cliente',clienteRoute); 
+app.use('/api/reservacion',reservacionRoute); 
+
 
 
 app.listen(process.env.PORT, ()=>{

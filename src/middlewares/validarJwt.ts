@@ -23,7 +23,7 @@ export const validarJwt = (req:Request,res:Response,next:NextFunction)=> {
       
         req.userId = payload.id;
         req.email= payload.email;
-    } catch (error) {
+    }catch (error) {
         return res.status(401).json({
             ok: false,
             msg: 'Token no valido'

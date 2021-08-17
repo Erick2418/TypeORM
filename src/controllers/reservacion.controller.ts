@@ -1,17 +1,17 @@
 import {Request,Response} from 'express'
 
 import { getRepository } from 'typeorm' //tre un repo o una tabla de una base de datos
-import { User } from '../entity/User';
+import { Reservacion } from '../entity/Reservacion';
+import { Cliente } from '../entity/Cliente';
 
-export const getUsers = async (req:Request,res:Response): Promise<Response> => {
+export const getReservaciones = async (req:Request,res:Response): Promise<Response> => {
 
     try {
         
-        const users =  await getRepository(User).find();//es como hacer un select
-        
+        const reservacion =  await getRepository(Reservacion).find();//es como hacer un select
         return res.json({
             ok:true,
-            users
+            reservacion
         });
     }catch (error) {
         return res.status(500).json({
@@ -23,13 +23,13 @@ export const getUsers = async (req:Request,res:Response): Promise<Response> => {
 }
 
 
-export const getUser = async (req:Request,res:Response): Promise<Response> => {
+export const getReservacion = async (req:Request,res:Response): Promise<Response> => {
     
-    const userID:string= req.params.id;
+    const reservID:string= req.params.id;
 
     try {
 
-        const results =  await getRepository(User).findOne(userID);//es como hacer un select
+        const results =  await getRepository(Reservacion).findOne(reservID);//es como hacer un select
         
         if(!results){
             return res.status(404).json({
@@ -50,14 +50,24 @@ export const getUser = async (req:Request,res:Response): Promise<Response> => {
     }
 }
 
-export const createUser = async (req:Request,res:Response): Promise<Response> => {
+export const createReservacion = async (req:Request,res:Response): Promise<Response> => {
     
-    const userNew:User=req.body;
+    const userNew:Reservacion=req.body;
+
+
+    const user = await getRepository(Cliente).findOne(userNew.cliente);
+    if(!user){
+        return res.status(404).json({
+            ok:false,
+            msg: ' Cliente no existe con ese ID'
+        })
+    }
+
     try {
 
-        const newUser= getRepository(User).create(userNew);
+        const newUser= getRepository(Reservacion).create(userNew);
 
-        const result = await getRepository(User).save(newUser);
+        const result = await getRepository(Reservacion).save(newUser);
 
         return res.json({
             ok:true,
@@ -73,13 +83,13 @@ export const createUser = async (req:Request,res:Response): Promise<Response> =>
 
 
 
-export const updateUser = async (req:Request,res:Response): Promise<Response> => {
+export const updateReservacion = async (req:Request,res:Response): Promise<Response> => {
 
-    const userID:string= req.params.id;
-    const userNew:User=req.body;
+    const reservacionID:string= req.params.id;
+    const reservaNew:Reservacion=req.body;
     try {
         
-        const user = await getRepository(User).findOne(userID);
+        const user = await getRepository(Reservacion).findOne(reservacionID);
         if(!user){
             return res.status(404).json({
                 ok:false,
@@ -87,9 +97,9 @@ export const updateUser = async (req:Request,res:Response): Promise<Response> =>
             })
         }
 
-        getRepository(User).merge(user, userNew);
+        getRepository(Reservacion).merge(user, reservaNew);
 
-        const results = await getRepository(User).save(user);
+        const results = await getRepository(Reservacion).save(user);
 
         return res.json({
             ok:true,
@@ -106,12 +116,12 @@ export const updateUser = async (req:Request,res:Response): Promise<Response> =>
 }
 
 
-export const deleteUser = async (req:Request,res:Response): Promise<Response> => {
+export const deleteReservacion = async (req:Request,res:Response): Promise<Response> => {
 
-    const userID:string= req.params.id;
+    const reservaID:string= req.params.id;
 
     try {
-        const results =  await getRepository(User).delete(userID);//es como hacer un select
+        const results =  await getRepository(Reservacion).delete(reservaID);//es como hacer un select
     //    console.log(results.affected) ;
         if(results.affected==0){
             return res.status(404).json({

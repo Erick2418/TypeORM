@@ -1,3 +1,6 @@
-export {Instituto} from "./Instituto"
-export {User} from "./User"
-export {Auth} from "./Auth"
+
+
+export {Cliente} from "./Cliente"
+// export {Auth} from "./Auth"
+export {Reservacion} from "./Reservacion"
+

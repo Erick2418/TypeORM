@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
-import { Auth } from '../entity';
+import { Cliente } from '../entity';
 import { Schema } from 'joi';
 
 export const validarShemaAuth= (schema: Schema)=>{
     return  async (req:Request,res:Response,next:NextFunction) => {
-        const user:Auth = req.body;
+        const user:Cliente = req.body;
         try{
             await schema.validateAsync(user);
             next();
